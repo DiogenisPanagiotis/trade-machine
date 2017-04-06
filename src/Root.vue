@@ -16,7 +16,7 @@
           </br>
 
           <transition-group
-            v-if="team1 && bool1"
+            v-if="team1 && !team2 && bool1"
             name="staggered-fade"
             tag="ul"
             v-bind:css="false"
@@ -88,11 +88,12 @@ export default {
   },
   methods: {
     clickArrow: function(){
+      if (this.team === 2) {
+        this.bool2 = !this.bool2;
+      }
       if (this.team === 1) {
         this.team += 1;
-      }
-      if (this.team === 2) {
-        this.focused = true;
+        this.bool1 = !this.bool1;
       }
       if (this.team === 2 && this.team2){
         this.team = 0;
@@ -133,12 +134,15 @@ export default {
     selectTeam(team, selection){
       this[team] = selection;
       console.log(this.team);
-      if (this.team === 1){
-        this.bool1 = !this.bool1;
-      }
-      if (this.team === 2) {
-        this.bool2 = !this.bool2;
-      }
+      // if (this.team === 1){
+        // this.bool1 = !this.bool1;
+      // }
+      // if (this.team === 2) {
+      //   this.bool2 = !this.bool2;
+      // }
+      // if (this.team === 2) {
+      //   this.bool2 = !this.bool2;
+      // }
     }
   }
 }
@@ -152,7 +156,7 @@ body {
 
 h1 {
   color: #fff;
-  margin-top: 250px;
+  margin-top: 300px;
   margin-bottom: 17px;
 }
 
