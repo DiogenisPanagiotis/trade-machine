@@ -134,15 +134,6 @@ export default {
     selectTeam(team, selection){
       this[team] = selection;
       console.log(this.team);
-      // if (this.team === 1){
-        // this.bool1 = !this.bool1;
-      // }
-      // if (this.team === 2) {
-      //   this.bool2 = !this.bool2;
-      // }
-      // if (this.team === 2) {
-      //   this.bool2 = !this.bool2;
-      // }
     }
   }
 }
