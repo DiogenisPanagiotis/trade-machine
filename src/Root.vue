@@ -59,6 +59,7 @@
 
 <script>
 import Teams from './teams.js';
+import utils from './utils.js';
 export default {
   name: 'root',
   data () {
@@ -88,53 +89,23 @@ export default {
   },
   methods: {
     clickArrow: function(){
-      if (this.team === 2) {
-        this.bool2 = !this.bool2;
-      }
       if (this.team === 1) {
         this.team += 1;
         this.bool1 = !this.bool1;
+      } else {
+        this.bool2 = !this.bool2;
       }
-      if (this.team === 2 && this.team2){
+      if (this.team2){
         this.team = 0;
-        console.log('Both teams selected!', this.team);
-        this.msg = 'Let\'\s trade!';
       }
-    },
-    beforeEnter: function (el) {
-      el.style.opacity = 0;
-      el.style.height = 0;
-    },
-    enter: function (el, done) {
-      let delay = el.dataset.index;
-      setTimeout(function() {
-        Velocity(
-          el,
-          { opacity: 1, height: '1.6em' },
-          { complete: done }
-        )
-      }, delay);
-    },
-    leave: function (el, done) {
-      let delay = el.dataset.index;
-      setTimeout(function () {
-        Velocity(
-          el,
-          { opacity: 0, height: 0 },
-          { complete: done }
-        )
-      }, delay)
-    },
-    teamCheck: function() {
-      if (this.team1 !== '' && this.team2 !== '') {
-        return true;
-      }
-      return false;
     },
     selectTeam(team, selection){
       this[team] = selection;
       console.log(this.team);
-    }
+    },
+    beforeEnter: utils.beforeEnter,
+    enter: utils.enter,
+    leave: utils.leave
   }
 }
 </script>
