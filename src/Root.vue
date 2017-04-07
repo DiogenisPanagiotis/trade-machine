@@ -1,17 +1,18 @@
 <template>
-  <div>
-    <div class="container">
+  <div class="fake-body">
+    <div v-if="!trading" class="container">
       <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
           <h1 v-if="team === 1 || team === 2"> Team {{ team }} </h1>
           <h1 v-if="team === 0" class="confirmed"> Trading </h1>
+          <span v-if="team === 0" @click="renderTrade()"class="glyphicon glyphicon-random" aria-hidden="true"></span>
           <ul v-if="team === 0">
             <li class="checked">{{team1}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
             <li class="checked">{{team2}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
           </ul>
           <input v-model="team1" v-if="team === 1" placeholder="Golden State Warriors" />
           <input v-model="team2" v-if="team === 2" placeholder="Cleveland Cavaliers" />
-          <span v-if="team === 1 || team === 2" @click="clickArrow()" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          <span v-if="buttonBool && (team === 1 || team === 2)" @click="clickArrow()" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
           </br>
           </br>
 
@@ -54,14 +55,18 @@
       </div>
     </div>
 
+    <Players v-if="trading" :team1="team1" :team2="team2"></Players>
+
   </div>
 </template>
 
 <script>
 import Teams from './teams.js';
+import Players from './Players.vue';
 import utils from './utils.js';
 export default {
   name: 'root',
+  components: { Players },
   data () {
     return {
       team: 1,
@@ -70,28 +75,21 @@ export default {
       teams1: Teams,
       teams2: Teams,
       bool1: true,
-      bool2: true
+      bool2: true,
+      buttonBool: false,
+      trading: false
     }
   },
   computed: {
-    team1Select: function(){
-      let that = this;
-      return this.teams1.filter((team) => {
-        return team.teamName.toLowerCase().indexOf(that.team1.toLowerCase()) !== -1 && team.teamName !== that.team2;
-      });
-    },
-    team2Select: function(){
-      let that = this;
-      return this.teams2.filter((team) => {
-        return team.teamName.toLowerCase().indexOf(that.team2.toLowerCase()) !== -1 && team.teamName !== that.team1;
-      });
-    }
+    team1Select: utils.team1Select,
+    team2Select: utils.team2Select
   },
   methods: {
     clickArrow: function(){
       if (this.team === 1) {
         this.team += 1;
         this.bool1 = !this.bool1;
+        this.buttonBool = !this.buttonBool;
       } else {
         this.bool2 = !this.bool2;
       }
@@ -102,6 +100,10 @@ export default {
     selectTeam(team, selection){
       this[team] = selection;
       console.log(this.team);
+      this.buttonBool = true;
+    },
+    renderTrade: function(){
+      this.trading = !this.trading;
     },
     beforeEnter: utils.beforeEnter,
     enter: utils.enter,
@@ -163,6 +165,18 @@ li:hover {
   transform: rotate(360deg);
 }
 
+.glyphicon-random {
+  display: inline;
+  float: right;
+  margin-right: 370px;
+  font-size: 35px;
+}
+
+.glyphicon-random:hover {
+  cursor: pointer;
+  color: #33B17D;
+}
+
 .confirmed {
   color: #33B17D;
 }
@@ -177,5 +191,7 @@ li.checked:hover {
   color: #fff;
   cursor: default;
 }
-
+.col-xs-8 {
+  /*border: 1px #fff solid;*/
+}
 </style>
