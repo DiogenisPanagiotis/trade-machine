@@ -4,7 +4,7 @@
 
 ## Demo
 
-> nba-trade.herokuapp.com
+> [nba-trade.herokuapp.com](https://nba-trade.herokuapp.com)
 
 ## Build Setup
 
