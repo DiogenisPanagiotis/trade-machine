@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4 text-center">
+        <button class="btn btn-md">
+          <span class="glyphicon glyphicon-transfer" area-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <br/>
     <!-- Team & Net -->
     <div class="row">
       <div class="col-xs-4 col-xs-offset-2">
@@ -12,9 +21,9 @@
       </div>
       <div class="col-xs-4">
         <ul class="list-group">
-          <li class="list-group-item list-group-team">{{ team2 }}
-            <span v-if="team2Data.net >= 0" class="team-badge badge pos">+{{ dollarify(team2Data.net) }}</span>
-            <span v-if="team2Data.net < 0" class="team-badge badge neg">-{{ dollarify(team2Data.net) }}</span>
+          <li class="list-group-item list-group-team text-right">{{ team2 }}
+            <span v-if="team2Data.net >= 0" class="team-badge team-badge-2 badge pos">+{{ dollarify(team2Data.net) }}</span>
+            <span v-if="team2Data.net < 0" class="team-badge team-badge-2 badge neg">-{{ dollarify(team2Data.net) }}</span>
           </li>
         </ul>
       </div>
@@ -81,7 +90,8 @@ export default {
         net: 0,
         trading: 0
       },
-      disabled: []
+      disabled: [],
+      active: false
     }
   },
   computed: {
@@ -123,18 +133,22 @@ export default {
 .team-badge {
   margin-top: 10px;
 }
+.team-badge-2 {
+  float: left;
+}
 .badge {
   background-color: inherit;
 }
 
 .list-group-team {
   font-size: 21px;
-  border: none;
+  border: #fff solid 1px;
 }
 
 .list-group-trading:hover {
   /*background-color: #2f1115;*/
   color: #EE3017;
+  text-decoration: line-through;
 }
 
 .pos {
@@ -144,4 +158,25 @@ export default {
 .neg {
   color: #EE3017;
 }
+
+.btn-md {
+  background-color: black;
+  border: #33B17D 1px solid;
+  vertical-align: middle;
+  width: 100px;
+}
+
+.btn-md:hover {
+  background-color: #33B17D;
+}
+
+.btn-md:hover .glyphicon-transfer {
+  color: black;
+}
+.glyphicon-transfer {
+  background-color: transparent;
+  color: #33B17D;
+  margin-top: 3px;
+}
+
 </style>
