@@ -1,10 +1,13 @@
 <template>
   <div class="container">
-
+    {{ validateTrade() }}
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4 text-center">
-        <button class="btn btn-md">
+        <button v-if="valid" class="btn btn-md valid" @click="completeTrade()">
           <span class="glyphicon glyphicon-transfer" area-hidden="true"></span>
+        </button>
+        <button v-if="!valid" class="btn btn-md notValid">
+          <span class="glyphicon glyphicon-ban-circle" area-hidden="true"></span>
         </button>
       </div>
     </div>
@@ -90,6 +93,14 @@ export default {
         net: 0,
         trading: 0
       },
+      received: {
+        'team1': [],
+        'team1Salary': 0,
+        'team2': [],
+        'team2Salary': 0
+      },
+      completed: false,
+      valid: null,
       disabled: [],
       active: false
     }
@@ -111,7 +122,9 @@ export default {
   methods: {
     dollarify: utils.dollarify,
     tradePlayer: utils.tradePlayer,
-    undoTradePlayer: utils.undoTradePlayer
+    undoTradePlayer: utils.undoTradePlayer,
+    validateTrade: utils.validateTrade,
+    completeTrade: utils.completeTrade
   }
 }
 </script>
@@ -176,6 +189,27 @@ export default {
 .glyphicon-transfer {
   background-color: transparent;
   color: #33B17D;
+  margin-top: 3px;
+}
+
+.notValid {
+  background-color: black;
+  border: #EE3017 1px solid;
+  vertical-align: middle;
+  width: 100px;
+}
+
+.notValid:hover .glyphicon-ban-circle {
+  color: black;
+}
+
+.notValid:hover {
+  background-color: #EE3017;
+}
+
+.glyphicon-ban-circle {
+  background-color: transparent;
+  color: #EE3017;
   margin-top: 3px;
 }
 
