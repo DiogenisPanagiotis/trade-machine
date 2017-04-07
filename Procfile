@@ -1,1 +1,1 @@
-npm heroku-postbuild
+node server/server.js

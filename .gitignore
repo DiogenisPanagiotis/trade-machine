@@ -1,1 +1,11 @@
+logs
+
+npm-debug.log*
+
+build.js
+
 node_modules
+
+.npm
+
+.node_repl_history
