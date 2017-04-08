@@ -102,30 +102,9 @@ export default {
     team2Select: utils.team2Select
   },
   methods: {
-    clickArrow: function(){
-      if (this.team === 1) {
-        this.team += 1;
-        this.bool1 = !this.bool1;
-        this.buttonBool = !this.buttonBool;
-        $('#pop').popover('show');
-        setTimeout(()=>{
-          $('#pop').popover('destroy');
-        }, 3000);
-      } else {
-        this.bool2 = !this.bool2;
-      }
-      if (this.team2){
-        this.team = 0;
-      }
-    },
-    selectTeam(team, selection){
-      this[team] = selection;
-      console.log(this.team);
-      this.buttonBool = true;
-    },
-    renderTrade: function(){
-      this.trading = !this.trading;
-    },
+    clickArrow: utils.clickArrow,
+    selectTeam: utils.selectTeam,
+    renderTrade: utils.renderTrade,
     beforeEnter: utils.beforeEnter,
     enter: utils.enter,
     leave: utils.leave

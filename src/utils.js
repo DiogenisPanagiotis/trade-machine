@@ -1,9 +1,9 @@
 module.exports = {
-  beforeEnter: function (el) {
+  beforeEnter(el) {
     el.style.opacity = 0;
     el.style.height = 0;
   },
-  enter: function (el, done) {
+  enter(el, done) {
     let delay = el.dataset.index;
     setTimeout(function() {
       Velocity(
@@ -13,7 +13,7 @@ module.exports = {
       )
     }, delay);
   },
-  leave: function (el, done) {
+  leave(el, done) {
     let delay = el.dataset.index;
     setTimeout(function () {
       Velocity(
@@ -23,19 +23,19 @@ module.exports = {
       )
     }, delay);
   },
-  team1Select: function(){
+  team1Select(){
     let that = this;
     return this.teams1.filter((team) => {
       return team.teamName.toLowerCase().indexOf(that.team1.toLowerCase()) !== -1 && team.teamName !== that.team2;
     });
   },
-  team2Select: function(){
+  team2Select(){
     let that = this;
     return this.teams2.filter((team) => {
       return team.teamName.toLowerCase().indexOf(that.team2.toLowerCase()) !== -1 && team.teamName !== that.team1;
     });
   },
-  dollarify: function(salary){
+  dollarify(salary){
     let num = salary.toString().split('');
     let niceNum = [];
     let count = 0;
@@ -50,7 +50,7 @@ module.exports = {
     console.log(`$${niceNum.join('')}`);
     return `$${niceNum.join('')}`;
   },
-  tradePlayer: function(player){
+  tradePlayer(player){
     if (player.teamName === this.team1 && this.disabled.indexOf(player.name) === -1) {
       this.team1Data.players.push(player);
       this.disabled.push(player.name);
@@ -65,7 +65,7 @@ module.exports = {
       this.team1Data.net -= player.salary;
     }
   },
-  undoTradePlayer: function(player, index) {
+  undoTradePlayer(player, index){
     console.log('Keeping:', player.name);
     if (player.teamName === this.team1) {
       this.team1Data.players.splice(index, 1); // Find and remove player from teamOneTrades and disabled
@@ -95,7 +95,7 @@ module.exports = {
       this.team1Data.net += player.salary;
     }
   },
-  validateTrade: function() {
+  validateTrade(){
     let low = Math.min(this.team1Data.trading, this.team2Data.trading);
     let high = Math.max(this.team1Data.trading, this.team2Data.trading);
     console.log('high, low:', high, low);
@@ -106,7 +106,7 @@ module.exports = {
       low * 1.5 >= high ? this.valid = true : this.valid = false;
     }
   },
-  completeTrade: function(){
+  completeTrade(){
     for (let i = 0; i < this.team1Data.players.length; i++) {
       let currentPlayer = this.team1Data.players[i];
       console.log(`Trading: ${currentPlayer}`);
@@ -133,12 +133,36 @@ module.exports = {
     this.completed = true;
     $('#myModal').modal('show');
   },
-  resetTrade: function(){
+  resetTrade(){
     this.received = {
       'team1': [],
       'team1Salary': 0,
       'team2': [],
       'team2Salary': 0
     }
+  },
+  clickArrow(){
+    if (this.team === 1) {
+      this.team += 1;
+      this.bool1 = !this.bool1;
+      this.buttonBool = !this.buttonBool;
+      $('#pop').popover('show');
+      setTimeout(()=>{
+        $('#pop').popover('destroy');
+      }, 3000);
+    } else {
+      this.bool2 = !this.bool2;
+    }
+    if (this.team2){
+      this.team = 0;
+    }
+  },
+  selectTeam(team, selection){
+    this[team] = selection;
+    console.log(this.team);
+    this.buttonBool = true;
+  },
+  renderTrade(){
+    this.trading = !this.trading;
   }
 };
