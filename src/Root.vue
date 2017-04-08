@@ -152,6 +152,7 @@ li {
 
 li:hover {
   color: #33B17D;
+  text-decoration: underline;
   cursor: pointer;
 }
 
