@@ -213,6 +213,9 @@ export default {
   border: #fff solid 1px;
 }
 
+.list-group-trading {
+  border-color: #33B17D;
+}
 .list-group-trading:hover {
   /*background-color: #2f1115;*/
   color: #EE3017;
@@ -252,6 +255,7 @@ export default {
   border: #EE3017 1px solid;
   vertical-align: middle;
   width: 100px;
+  cursor: not-allowed;
 }
 
 .notValid:hover .glyphicon-ban-circle {
