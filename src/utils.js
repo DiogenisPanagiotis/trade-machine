@@ -132,5 +132,13 @@ module.exports = {
     this.disabled = [];
     this.completed = true;
     $('#myModal').modal('show');
+  },
+  resetTrade: function(){
+    this.received = {
+      'team1': [],
+      'team1Salary': 0,
+      'team2': [],
+      'team2Salary': 0
+    }
   }
 };

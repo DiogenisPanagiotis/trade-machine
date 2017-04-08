@@ -76,7 +76,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeModal" aria-hidden="true">&times;</span></button>
+            <button @click="resetTrade()"type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeModal" aria-hidden="true">&times;</span></button>
             <span class="header-success">SUCCESSFUL TRADE!</span><span class="glyphicon glyphicon-ok success" aria-hidden="true"></span>
           </div>
           <div class="modal-body">
@@ -118,10 +118,6 @@
                 </ul>
               </div>
             </div>
-
-
-
-
 
           </div>
         </div>
@@ -182,7 +178,8 @@ export default {
     tradePlayer: utils.tradePlayer,
     undoTradePlayer: utils.undoTradePlayer,
     validateTrade: utils.validateTrade,
-    completeTrade: utils.completeTrade
+    completeTrade: utils.completeTrade,
+    resetTrade: utils.resetTrade
   }
 }
 </script>

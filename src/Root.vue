@@ -2,7 +2,12 @@
   <div class="fake-body">
     <div v-if="!trading" class="container">
       <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
+        <div class="col-xs-2 col-xs-offset-1">
+          <div class="block-pop"></div>
+          <a v-if="team === 1 || team === 2" tabindex="0" id="pop" class="pop" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Select your team!"></a>
+        </div>
+        <div class="col-xs-6">
+          <div class="block"></div>
           <h1 v-if="team === 1 || team === 2"> Team {{ team }} </h1>
           <h1 v-if="team === 0" class="confirmed"> Trading </h1>
           <span v-if="team === 0" @click="renderTrade()"class="glyphicon glyphicon-random" aria-hidden="true"></span>
@@ -10,8 +15,8 @@
             <li class="checked">{{team1}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
             <li class="checked">{{team2}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
           </ul>
-          <input v-model="team1" v-if="team === 1" placeholder="Golden State Warriors" />
-          <input v-model="team2" v-if="team === 2" placeholder="Cleveland Cavaliers" />
+          <input v-model="team1" v-if="team === 1" placeholder="Golden State Warriors" autofocus/>
+          <input v-model="team2" v-if="team === 2" placeholder="Cleveland Cavaliers" autofocus/>
           <span v-if="buttonBool && (team === 1 || team === 2)" @click="clickArrow()" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
           </br>
           </br>
@@ -80,6 +85,15 @@ export default {
       trading: false
     }
   },
+  mounted: function(){
+    $(function(){
+      $('body').popover({ selector: '[data-toggle="popover"]' });
+      $('#pop').popover('show');
+    });
+    setTimeout(()=>{
+      $('#pop').popover('destroy');
+    }, 3000);
+  },
   computed: {
     team1Select: utils.team1Select,
     team2Select: utils.team2Select
@@ -90,6 +104,10 @@ export default {
         this.team += 1;
         this.bool1 = !this.bool1;
         this.buttonBool = !this.buttonBool;
+        $('#pop').popover('show');
+        setTimeout(()=>{
+          $('#pop').popover('destroy');
+        }, 3000);
       } else {
         this.bool2 = !this.bool2;
       }
@@ -120,7 +138,7 @@ body {
 
 h1 {
   color: #fff;
-  margin-top: 300px;
+  /*margin-top: 300px;*/
   margin-bottom: 17px;
 }
 
@@ -138,6 +156,7 @@ input:focus {
 ::-webkit-input-placeholder {
   color: #333333;
   font-size: 24px;
+  /*text-decoration: underline;*/
 }
 
 ul {
@@ -168,7 +187,7 @@ li:hover {
 .glyphicon-random {
   display: inline;
   float: right;
-  margin-right: 370px;
+  margin-right: 180px;
   font-size: 35px;
 }
 
@@ -193,5 +212,33 @@ li.checked:hover {
 }
 .col-xs-8 {
   /*border: 1px #fff solid;*/
+}
+
+.arrow {
+  /*background-color: #333333;
+  color: #333333;*/
+}
+
+.popover-content {
+  /*background-color: #333333;*/
+  /*color: #fff;*/
+  /*border: none;*/
+}
+.popover-title {
+  /*background-color: #333333;*/
+}
+.pop {
+  width: 1px;
+}
+a {
+  /*margin-top: 350px;*/
+  /*display: inline;*/
+  margin-left: 180px;
+}
+.block {
+  margin-top: 300px;
+}
+.block-pop {
+  margin-top: 360px;
 }
 </style>
