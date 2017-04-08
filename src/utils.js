@@ -111,7 +111,7 @@ module.exports = {
       let currentPlayer = this.team1Data.players[i];
       console.log(`Trading: ${currentPlayer}`);
       currentPlayer.teamName = this.team2;
-      this.received.team1.push(currentPlayer);
+      this.received.team2.push(currentPlayer);
       console.log(`${currentPlayer} now on ${this.team2}`);
     }
     this.team1Data.players = [];
@@ -131,5 +131,6 @@ module.exports = {
     this.team2Data.net = 0;
     this.disabled = [];
     this.completed = true;
+    $('#myModal').modal('show');
   }
 };

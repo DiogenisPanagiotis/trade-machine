@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container top">
     {{ validateTrade() }}
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4 text-center">
@@ -24,9 +24,9 @@
       </div>
       <div class="col-xs-4">
         <ul class="list-group">
-          <li class="list-group-item list-group-team text-right">{{ team2 }}
-            <span v-if="team2Data.net >= 0" class="team-badge team-badge-2 badge pos">+{{ dollarify(team2Data.net) }}</span>
-            <span v-if="team2Data.net < 0" class="team-badge team-badge-2 badge neg">-{{ dollarify(team2Data.net) }}</span>
+          <li class="list-group-item list-group-team">{{ team2 }}
+            <span v-if="team2Data.net >= 0" class="team-badge badge pos">+{{ dollarify(team2Data.net) }}</span>
+            <span v-if="team2Data.net < 0" class="team-badge badge neg">-{{ dollarify(team2Data.net) }}</span>
           </li>
         </ul>
       </div>
@@ -70,6 +70,64 @@
         </ul>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeModal" aria-hidden="true">&times;</span></button>
+            <span class="header-success">SUCCESSFUL TRADE!</span><span class="glyphicon glyphicon-ok success" aria-hidden="true"></span>
+          </div>
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="col-xs-6">
+                <ul class="list-group">
+                  <li class="list-group-item list-group-team modal-team">{{ team1 }}
+                    <span v-if="received.team1Salary >= 0" class="team-badge badge modal-badge pos">+{{ dollarify(received.team1Salary) }}</span>
+                    <span v-if="received.team1Salary < 0" class="team-badge badge modal-badge neg">-{{ dollarify(received.team1Salary) }}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-xs-6">
+                <ul class="list-group">
+                  <li class="list-group-item list-group-team modal-team-right">{{ team2 }}
+                    <span v-if="received.team2Salary >= 0" class="team-badge badge modal-badge pos">+{{ dollarify(received.team2Salary) }}</span>
+                    <span v-if="received.team2Salary < 0" class="team-badge badge modal-badge neg">-{{ dollarify(received.team2Salary) }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">
+                <ul class="list-group">
+                  <li v-for="(player, index) in received.team2" class="list-group-item list-group-trading modal-list-items">
+                    {{ player.name }} - {{ player.position }}
+                    <span class="badge">{{ dollarify(player.salary) }}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-xs-6">
+                <ul class="list-group">
+                  <li v-for="(player, index) in received.team1" class="list-group-item list-group-trading modal-list-items-right">
+                    {{ player.name }} - {{ player.position }}
+                    <span class="badge">{{ dollarify(player.salary) }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -131,7 +189,7 @@ export default {
 
 <style scoped>
 
-.container {
+.top {
   margin-top: 150px;
 }
 
@@ -212,5 +270,100 @@ export default {
   color: #EE3017;
   margin-top: 3px;
 }
+.glyphicon-ban-circle:hover {
+  cursor: not-allowed;
+}
+.modal-header {
+  /*margin-top: 150px;*/
+  background-color: black;
+  border-bottom: 5px solid #33B17D;
+}
+.modal-body {
+  padding: 5px 5px 0px 5px;
+  /*border: 1px solid #33B17D;*/
+  background-color: black;
+  margin-bottom: 0px;
+}
+.close {
+  color: #fff;
+  opacity: 1;
+  text-shadow: none;
+  /*transition: 0.5s ease-out;*/
+}
+.close:hover {
+  color: #33B17D;
+  text-shadow: none;
+  /*transform: rotate(360deg);*/
+}
 
+.modal-dialog {
+  padding-top: 10%;
+}
+
+.col-xs-6 {
+  padding: none;
+}
+
+.modal-team {
+  font-size: 16px;
+  border: none;
+  padding-right: 0px;
+}
+.modal-team:hover {
+  text-decoration: none;
+  cursor: default;
+  color: #fff;
+}
+
+.modal-team-right {
+  font-size: 16px;
+  border: none;
+  padding-left: 0px;
+}
+.modal-team-right:hover {
+  text-decoration: none;
+  cursor: default;
+  color: #fff;
+}
+
+.modal-list-items {
+  border: none;
+  padding-right: 0px;
+}
+.modal-list-items:hover {
+  cursor: default;
+  color: #fff;
+  text-decoration: none;
+}
+.modal-list-items-right {
+  border: none;
+  padding-left: 0px;
+}
+.modal-list-items-right:hover {
+  text-decoration: none;
+  cursor: default;
+  color: #fff;
+}
+
+.modal-badge {
+  margin-top: 5px;
+}
+
+.modal-content {
+border: 5px solid #33B17D;
+overflow: hidden;
+-webkit-border-radius: 5px !important;
+-moz-border-radius: 5px !important;
+border-radius: 5px !important;
+}
+
+.header-success {
+  font-size: 15px;
+  color: #33B17D;
+}
+.success {
+  font-size: 15px;
+  display: inline;
+  color: #33B17D;
+}
 </style>
