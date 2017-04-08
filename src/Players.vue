@@ -212,6 +212,11 @@ export default {
   font-size: 21px;
   border: #fff solid 1px;
 }
+.list-group-team:hover {
+  color: #fff;
+  text-decoration: none;
+  cursor: default;
+}
 
 .list-group-trading {
   border-color: #33B17D;
