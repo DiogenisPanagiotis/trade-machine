@@ -103,7 +103,7 @@
             <div class="row">
               <div class="col-xs-6">
                 <ul class="list-group">
-                  <li v-for="(player, index) in received.team2" class="list-group-item list-group-trading modal-list-items">
+                  <li v-for="(player, index) in received.team1" class="list-group-item list-group-trading modal-list-items">
                     {{ player.name }} - {{ player.position }}
                     <span class="badge">{{ dollarify(player.salary) }}</span>
                   </li>
@@ -111,7 +111,7 @@
               </div>
               <div class="col-xs-6">
                 <ul class="list-group">
-                  <li v-for="(player, index) in received.team1" class="list-group-item list-group-trading modal-list-items-right">
+                  <li v-for="(player, index) in received.team2" class="list-group-item list-group-trading modal-list-items-right">
                     {{ player.name }} - {{ player.position }}
                     <span class="badge">{{ dollarify(player.salary) }}</span>
                   </li>
