@@ -91,7 +91,7 @@ import Players from './Players.vue';
 import utils from './utils.js';
 export default {
   name: 'root',
-  components: { Players },
+  components: { Players, Mobile },
   data () {
     return {
       team: 1,

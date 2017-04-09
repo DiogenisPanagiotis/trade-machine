@@ -352,7 +352,7 @@ export default {
 }
 
 .modal-badge {
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 .modal-content {
