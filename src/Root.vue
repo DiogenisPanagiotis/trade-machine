@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="fake-body mobileHide">
     <div v-if="!trading" class="container">
       <div class="row">
@@ -64,6 +65,21 @@
     </div>
 
     <Players v-if="trading" :team1="team1" :team2="team2"></Players>
+
+  </div>
+
+
+  <div class="mobileShow">
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h3>Oops! Try viewing on a larger screen.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   </div>
 </template>
@@ -234,4 +250,13 @@ a {
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px){  .mobileHide { display: none;}}
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px){ .mobileShow { display: inline;}}
+
+.jumbotron {
+  background-color: black;
+  color: white;
+}
 </style>
