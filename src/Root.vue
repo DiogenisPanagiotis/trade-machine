@@ -1,5 +1,5 @@
 <template>
-  <div class="fake-body">
+  <div class="fake-body hidden-xs-down">
     <div v-if="!trading" class="container">
       <div class="row">
         <div class="col-xs-2 col-xs-offset-1">

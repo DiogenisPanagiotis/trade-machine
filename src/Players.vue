@@ -1,5 +1,5 @@
 <template>
-  <div class="container top">
+  <div class="container top hidden-xs-down">
     {{ validateTrade() }}
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4 text-center">
