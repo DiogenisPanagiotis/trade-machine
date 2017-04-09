@@ -231,7 +231,7 @@ a {
 .block-arrow {
   margin-top: 350px;
 }
-.mobileHide {
-  display: none;
-}
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px){  .mobileHide { display: none;}}
 </style>

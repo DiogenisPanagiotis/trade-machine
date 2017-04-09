@@ -373,7 +373,7 @@ border-radius: 5px !important;
   color: #33B17D;
 }
 
-.mobileHide {
-  display: none;
-}
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px){  .mobileHide { display: none;}}
 </style>
