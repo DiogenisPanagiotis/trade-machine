@@ -1,85 +1,72 @@
 <template>
   <div>
-  <div class="fake-body mobileHide">
-    <div v-if="!trading" class="container">
-      <div class="row">
-        <div class="col-xs-2 col-xs-offset-1">
-          <div class="block-pop"></div>
-          <a v-if="team === 1 || team === 2" tabindex="0" id="pop" class="pop" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Select a team."></a>
-        </div>
-        <div class="col-xs-3">
-          <div class="block"></div>
-          <h1 v-if="team === 1 || team === 2"> Team {{ team }} </h1>
-          <h1 v-if="team === 0" class="confirmed"> Trading </h1>
-          <ul v-if="team === 0">
-            <li class="checked">{{team1}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
-            <li class="checked">{{team2}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
-          </ul>
-          <input v-model="team1" v-if="team === 1" placeholder="Golden State Warriors" autofocus/>
-          <input v-model="team2" v-if="team === 2" placeholder="Cleveland Cavaliers" autofocus/>
-          </br>
-          </br>
-
-          <transition-group
-            v-if="team1 && !team2 && bool1"
-            name="staggered-fade"
-            tag="ul"
-            v-bind:css="false"
-            v-on:before-enter="beforeEnter"
-            v-on:enter="enter"
-            v-on:leave="leave"
-          >
-            <li
-              v-for="(team, index) in team1Select"
-              v-bind:key="team.teamName"
-              v-bind:data-index="index"
-              @click="selectTeam('team1', team.teamName)"
-            >{{ team.teamName }}
-            </li>
-          </transition-group>
-
-          <transition-group
-            v-if="team2 && bool2"
-            name="staggered-fade"
-            tag="ul"
-            v-bind:css="false"
-            v-on:before-enter="beforeEnter"
-            v-on:enter="enter"
-            v-on:leave="leave"
-          >
-            <li
-              v-for="(team, index) in team2Select"
-              v-bind:key="team.teamName"
-              v-bind:data-index="index"
-              @click="selectTeam('team2', team.teamName)"
-            >{{ team.teamName }}
-            </li>
-          </transition-group>
-        </div>
-        <div class="col-xs-3">
-          <div class="block-arrow"></div>
-          <span v-if="buttonBool && (team === 1 || team === 2)" @click="clickArrow()" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-          <span v-if="team === 0" @click="renderTrade()"class="glyphicon glyphicon-random" aria-hidden="true"></span>
-        </div>
-      </div>
-    </div>
-
-    <Players v-if="trading" :team1="team1" :team2="team2"></Players>
-
-  </div>
-
-  <Mobile></Mobile>
-  <!-- <div class="mobileShow">
-    <div class="jumbotron">
-      <div class="container">
+    <div class="fake-body mobileHide">
+      <div v-if="!trading" class="container">
         <div class="row">
-          <div class="col-xs-12 text-center">
-            <h3>Oops! Try viewing on a larger screen.</h3>
+          <div class="col-xs-2 col-xs-offset-1">
+            <div class="block-pop"></div>
+            <a v-if="team === 1 || team === 2" tabindex="0" id="pop" class="pop" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Select a team."></a>
+          </div>
+          <div class="col-xs-3">
+            <div class="block"></div>
+            <h1 v-if="team === 1 || team === 2"> Team {{ team }} </h1>
+            <h1 v-if="team === 0" class="confirmed"> Trading </h1>
+            <ul v-if="team === 0">
+              <li class="checked">{{team1}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
+              <li class="checked">{{team2}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
+            </ul>
+            <input v-model="team1" v-if="team === 1" placeholder="Golden State Warriors" autofocus/>
+            <input v-model="team2" v-if="team === 2" placeholder="Cleveland Cavaliers" autofocus/>
+            </br>
+            </br>
+
+            <transition-group
+              v-if="team1 && !team2 && bool1"
+              name="staggered-fade"
+              tag="ul"
+              v-bind:css="false"
+              v-on:before-enter="beforeEnter"
+              v-on:enter="enter"
+              v-on:leave="leave"
+            >
+              <li
+                v-for="(team, index) in team1Select"
+                v-bind:key="team.teamName"
+                v-bind:data-index="index"
+                @click="selectTeam('team1', team.teamName)"
+              >{{ team.teamName }}
+              </li>
+            </transition-group>
+
+            <transition-group
+              v-if="team2 && bool2"
+              name="staggered-fade"
+              tag="ul"
+              v-bind:css="false"
+              v-on:before-enter="beforeEnter"
+              v-on:enter="enter"
+              v-on:leave="leave"
+            >
+              <li
+                v-for="(team, index) in team2Select"
+                v-bind:key="team.teamName"
+                v-bind:data-index="index"
+                @click="selectTeam('team2', team.teamName)"
+              >{{ team.teamName }}
+              </li>
+            </transition-group>
+          </div>
+          <div class="col-xs-3">
+            <div class="block-arrow"></div>
+            <span v-if="buttonBool && (team === 1 || team === 2)" @click="clickArrow()" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+            <span v-if="team === 0" @click="renderTrade()"class="glyphicon glyphicon-random" aria-hidden="true"></span>
           </div>
         </div>
       </div>
+      <Players v-if="trading" :team1="team1" :team2="team2"></Players>
     </div>
-  </div> -->
+    <!-- Mobile template-->
+    <Mobile></Mobile>
 
   </div>
 </template>
