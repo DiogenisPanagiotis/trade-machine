@@ -1,5 +1,5 @@
 <template>
-  <div class="fake-body hidden-phone">
+  <div class="fake-body mobileHide">
     <div v-if="!trading" class="container">
       <div class="row">
         <div class="col-xs-2 col-xs-offset-1">
@@ -230,5 +230,8 @@ a {
 }
 .block-arrow {
   margin-top: 350px;
+}
+.mobileHide {
+  display: none;
 }
 </style>

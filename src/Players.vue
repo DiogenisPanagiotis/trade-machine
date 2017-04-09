@@ -1,5 +1,5 @@
 <template>
-  <div class="container top hidden-phone">
+  <div class="container top mobileHide">
     {{ validateTrade() }}
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4 text-center">
@@ -371,5 +371,9 @@ border-radius: 5px !important;
   font-size: 15px;
   display: inline;
   color: #33B17D;
+}
+
+.mobileHide {
+  display: none;
 }
 </style>
