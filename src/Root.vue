@@ -68,8 +68,8 @@
 
   </div>
 
-
-  <div class="mobileShow">
+  <Mobile></Mobile>
+  <!-- <div class="mobileShow">
     <div class="jumbotron">
       <div class="container">
         <div class="row">
@@ -79,13 +79,14 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   </div>
 </template>
 
 <script>
 import Teams from './teams.js';
+import Mobile from './Mobile.vue';
 import Players from './Players.vue';
 import utils from './utils.js';
 export default {
@@ -248,19 +249,8 @@ a {
   margin-top: 350px;
 }
 
-.mobileShow {
-  display: none;
-}
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px){  .mobileHide { display: none;}}
 
-@media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px){ .mobileShow { display: inline;}}
-
-.jumbotron {
-  background-color: black;
-  color: white;
-}
 </style>

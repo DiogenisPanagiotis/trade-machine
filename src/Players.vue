@@ -311,7 +311,7 @@ export default {
 }
 
 .modal-team {
-  font-size: 16px;
+  font-size: 15px;
   border: none;
   padding-right: 0px;
 }
@@ -322,7 +322,7 @@ export default {
 }
 
 .modal-team-right {
-  font-size: 16px;
+  font-size: 15px;
   border: none;
   padding-left: 0px;
 }
