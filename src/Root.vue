@@ -34,7 +34,9 @@
                 v-bind:key="team.teamName"
                 v-bind:data-index="index"
                 @click="selectTeam('team1', team.teamName)"
-              >{{ team.teamName }}
+              >
+              <img class="logos" :src="team.logo" height="29" width="29" />
+              <span class="logos-name"> {{ team.teamName }}</span>
               </li>
             </transition-group>
 
@@ -52,7 +54,9 @@
                 v-bind:key="team.teamName"
                 v-bind:data-index="index"
                 @click="selectTeam('team2', team.teamName)"
-              >{{ team.teamName }}
+              >
+              <img class="logos" :src="team.logo" height="29" width="29" />
+              <span class="logos-name"> {{ team.teamName }}</span>
               </li>
             </transition-group>
           </div>
@@ -67,7 +71,6 @@
     </div>
     <!-- Mobile template-->
     <Mobile></Mobile>
-
   </div>
 </template>
 
@@ -156,7 +159,6 @@ li {
 
 li:hover {
   color: #33B17D;
-  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -239,5 +241,9 @@ a {
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px){  .mobileHide { display: none;}}
+
+.logos-name {
+  padding-left: 3px;
+}
 
 </style>
