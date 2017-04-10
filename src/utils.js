@@ -158,8 +158,50 @@ module.exports = {
     }
   },
   selectTeam(team, selection){
-    this[team] = selection;
-    console.log(this.team);
+    if (this.team === 1){
+      this.team1 = selection;
+      this.team1Logo = team.logo;
+      this.team++;
+      for (let i = 0; i < this.t1.length; i++){
+        let ele = this.t1[i];
+        if (this.team1 === ele.teamName){
+          this.t1.splice(i, 1);
+        }
+      }
+      for (let i = 0; i < this.t2.length; i++){
+        let ele = this.t2[i];
+        if (this.team1 === ele.teamName){
+          this.t2.splice(i, 1);
+        }
+      }
+      for (let i = 0; i < this.t3.length; i++){
+        let ele = this.t3[i];
+        if (this.team1 === ele.teamName){
+          this.t3.splice(i, 1);
+        }
+      }
+      for (let i = 0; i < this.t4.length; i++){
+        let ele = this.t4[i];
+        if (this.team1 === ele.teamName){
+          this.t4.splice(i, 1);
+        }
+      }
+      for (let i = 0; i < this.t5.length; i++){
+        let ele = this.t5[i];
+        if (this.team1 === ele.teamName){
+          this.t5.splice(i, 1);
+        }
+      }
+    } else {
+      this.team2 = selection;
+      this.team2Logo = team.logo;
+      $('#myModalTrade').modal('show');
+      console.log(this.team1Logo);
+      console.log(this.team1, this.team2);
+      console.log(this.team2Logo);
+      this.trading = !this.trading;
+      this.team = 0;
+    }
     this.buttonBool = true;
   },
   renderTrade(){

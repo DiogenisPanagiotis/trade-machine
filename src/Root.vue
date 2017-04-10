@@ -1,98 +1,152 @@
 <template>
-  <div>
-    <div class="fake-body mobileHide">
-      <div v-if="!trading" class="container">
-        <div class="row">
-          <div class="col-xs-2 col-xs-offset-1">
-            <div class="block-pop"></div>
-            <a v-if="team === 1 || team === 2" tabindex="0" id="pop" class="pop" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="Select a team."></a>
+  <div> <!-- start -->
+    <div class="container mobileHide"> <!-- container -->
+      <div class="row"> <!-- directions -->
+        <div v-if="team !== 0" class="space"></div>
+        <div v-if="directions" class="col-xs-12 col-sm-4 col-sm-offset-4">
+          <h2>NBA Trade Machine</h2>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a class="directions" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    How to use Trade Machine.
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <ul class="list-group">
+                  <li class="list-group-item how-to"><b>1.</b> Select Team 1.</li>
+                  <li class="list-group-item how-to"><b>2.</b> Select Team 2.</li>
+                  <li class="list-group-item how-to"><b>3.</b> Trade players.</li>
+                  <li class="list-group-item how-to"><b>4.</b> Enjoy!</li>
+                </ul>
+              </div>
+            </div>
+            <button @click="hideDirections()" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-thumbs-up"></span></button>
           </div>
-          <div class="col-xs-3">
-            <div class="block"></div>
-            <h1 v-if="team === 1 || team === 2"> Team {{ team }} </h1>
-            <h1 v-if="team === 0" class="confirmed"> Trading </h1>
-            <ul v-if="team === 0">
-              <li class="checked">{{team1}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
-              <li class="checked">{{team2}}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></li>
-            </ul>
-            <input v-model="team1" v-if="team === 1" placeholder="Golden State Warriors" autofocus/>
-            <input v-model="team2" v-if="team === 2" placeholder="Cleveland Cavaliers" autofocus/>
-            </br>
-            </br>
+        </div> <!-- directions -->
 
-            <transition-group
-              v-if="team1 && !team2 && bool1"
-              name="staggered-fade"
-              tag="ul"
-              v-bind:css="false"
-              v-on:before-enter="beforeEnter"
-              v-on:enter="enter"
-              v-on:leave="leave"
-            >
-              <li
-                v-for="(team, index) in team1Select"
-                v-bind:key="team.teamName"
-                v-bind:data-index="index"
-                @click="selectTeam('team1', team.teamName)"
-              >
-              <img class="logos" :src="team.logo" height="29" width="29" />
-              <span class="logos-name"> {{ team.teamName }}</span>
-              </li>
-            </transition-group>
+        <div v-if="!trading && !directions"> <!-- selecting teams -->
 
-            <transition-group
-              v-if="team2 && bool2"
-              name="staggered-fade"
-              tag="ul"
-              v-bind:css="false"
-              v-on:before-enter="beforeEnter"
-              v-on:enter="enter"
-              v-on:leave="leave"
-            >
-              <li
-                v-for="(team, index) in team2Select"
-                v-bind:key="team.teamName"
-                v-bind:data-index="index"
-                @click="selectTeam('team2', team.teamName)"
-              >
-              <img class="logos" :src="team.logo" height="29" width="29" />
-              <span class="logos-name"> {{ team.teamName }}</span>
-              </li>
-            </transition-group>
+          <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+            <div v-if="team === 1"><h2> TEAM {{ team }} </h2></div>
+            <div v-if="team === 2"><h2> TEAM {{ team }} </h2></div>
           </div>
-          <div class="col-xs-3">
-            <div class="block-arrow"></div>
-            <span v-if="buttonBool && (team === 1 || team === 2)" @click="clickArrow()" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-            <span v-if="team === 0" @click="renderTrade()"class="glyphicon glyphicon-random" aria-hidden="true"></span>
-          </div>
-        </div>
-      </div>
+
+          <div class="col-xs-12 col-sm-6 col-sm-offset-3"> <!-- columns for collape well -->
+            <div id="collapseExample1"> <!-- start collapse id -->
+              <div class="well"> <!-- start well -->
+                <div class="col-sm-3">
+                  <li
+                  class="list-well"
+                  v-for="(team, index) in t1"
+                  v-bind:key="team.teamName"
+                  v-bind:data-index="index"
+                  @click="selectTeam(team, team.teamName)"
+                  >
+                  <img class="logos" :src="team.logo" height="29" width="29" />
+                  <span class="logos-name"> {{ team.abbreviation }}</span>
+                  </li>
+                </div>
+                <div class="col-sm-3">
+                  <li
+                  class="list-well"
+                  v-for="(team, index) in t2"
+                  v-bind:key="team.teamName"
+                  v-bind:data-index="index"
+                  @click="selectTeam(team, team.teamName)"
+                  >
+                  <img class="logos" :src="team.logo" height="29" width="29" />
+                  <span class="logos-name"> {{ team.abbreviation }}</span>
+                  </li>
+                </div>
+                <div class="col-sm-3">
+                  <li
+                  class="list-well"
+                  v-for="(team, index) in t3"
+                  v-bind:key="team.teamName"
+                  v-bind:data-index="index"
+                  @click="selectTeam(team, team.teamName)"
+                  >
+                  <img class="logos" :src="team.logo" height="29" width="29" />
+                  <span class="logos-name"> {{ team.abbreviation }}</span>
+                  </li>
+                </div>
+                <div class="col-sm-3">
+                  <li
+                  class="list-well"
+                  v-for="(team, index) in t4"
+                  v-bind:key="team.teamName"
+                  v-bind:data-index="index"
+                  @click="selectTeam(team, team.teamName)"
+                  >
+                  <img class="logos" :src="team.logo" height="29" width="29" />
+                  <span class="logos-name"> {{ team.abbreviation }}</span>
+                  </li>
+                </div>
+                <div class="col-sm-3">
+                  <li
+                  class="list-well"
+                  v-for="(team, index) in t5"
+                  v-bind:key="team.teamName"
+                  v-bind:data-index="index"
+                  @click="selectTeam(team, team.teamName)"
+                  >
+                  <img class="logos" :src="team.logo" height="29" width="29" />
+                  <span class="logos-name"> {{ team.abbreviation }}</span>
+                  </li>
+                </div>
+              </div> <!-- end well -->
+            </div> <!-- end collapse id -->
+          </div> <!-- end columns for collape well -->
+        </div> <!-- end selecting teams -->
+      </div> <!-- end container -->
+    </div> <!-- end -->
+
+
+    <!-- Mobile template-->
+    <Modal class="mobileHide" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo"></Modal>
+    <div v-if="trading" class="mobileHide">
       <Players v-if="trading" :team1="team1" :team2="team2"></Players>
     </div>
-    <!-- Mobile template-->
     <Mobile></Mobile>
   </div>
 </template>
 
 <script>
 import Teams from './teams.js';
+import t1 from './teamObject1.js';
+import t2 from './teamObject2.js';
+import t3 from './teamObject3.js';
+import t4 from './teamObject4.js';
+import t5 from './teamObject5.js';
 import Mobile from './Mobile.vue';
 import Players from './Players.vue';
+import Modal from './Modal.vue';
 import utils from './utils.js';
 export default {
   name: 'root',
-  components: { Players, Mobile },
+  components: { Players, Mobile, Modal },
   data () {
     return {
       team: 1,
       team1: '',
+      team1Logo: null,
       team2: '',
+      team2Logo: null,
       teams1: Teams,
       teams2: Teams,
       bool1: true,
       bool2: true,
       buttonBool: false,
-      trading: false
+      trading: false,
+      directions: true,
+      t1: t1,
+      t2: t2,
+      t3: t3,
+      t4: t4,
+      t5: t5
     }
   },
   mounted: function(){
@@ -114,7 +168,10 @@ export default {
     renderTrade: utils.renderTrade,
     beforeEnter: utils.beforeEnter,
     enter: utils.enter,
-    leave: utils.leave
+    leave: utils.leave,
+    hideDirections: function(){
+      this.directions = !this.directions;
+    }
   }
 }
 </script>
@@ -246,4 +303,84 @@ and (max-device-width : 480px){  .mobileHide { display: none;}}
   padding-left: 3px;
 }
 
+.directions {
+  margin-left: 16px;
+  text-align: center;
+}
+
+.space {
+  margin-top: 225px;
+}
+
+h2 {
+  color: #fff;
+  text-align: center;
+}
+
+.panel-group {
+  margin-left: 42px;
+  width: 275px;
+}
+.how-to {
+  color: black;
+}
+
+.how-to:hover {
+  color: black;
+  text-decoration: none;
+  cursor: default;
+}
+
+.btn-success {
+  margin-top: 16px;
+  text-align: center;
+  width: 275px;
+  background-color: black;
+  border: 3px solid #33B17D;
+}
+.btn-success:hover {
+  border: 2px solid #33B17D;
+  background-color: #33B17D;
+  color: black;
+}
+.glyphicon-thumbs-up {
+  background-color: transparent;
+  color: #33B17D;
+}
+.btn-success:hover .glyphicon-thumbs-up {
+  color: black;
+}
+
+.btn-select {
+
+}
+
+.btn-team {
+  background-color: black;
+  border: 3px solid #33B17D;
+  width: 500px;
+  height: 100px;
+  color: #fff;
+}
+.btn-team:hover {
+  background-color: #33B17D;
+}
+
+.well {
+  margin-top: 20px;
+  height: 210px;
+  background-color: black;
+  border: solid 1px #fff;
+  padding-right: 0px;
+  padding-left: 27px;
+}
+
+.col-sm-3 {
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 20%;
+}
+.list-well {
+  /*width: 10px;*/
+}
 </style>
