@@ -102,14 +102,16 @@
               </div> <!-- end well -->
             </div> <!-- end collapse id -->
           </div> <!-- end columns for collape well -->
-        </div></transition> <!-- end selecting teams -->
+        </div> <!-- end selecting teams -->
       </div> <!-- end container -->
     </div> <!-- end -->
 
     <!-- Mobile template-->
     <Modal class="mobileHide" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo" ></Modal>
     <div class="mobileHide">
-      <Players v-if="trading && !transitioning" :team1="team1" :team2="team2"></Players>
+      <transition name="modal-fade">
+        <Players v-if="trading && !transitioning" :team1="team1" :team2="team2"></Players>
+      </transition>
     </div>
     <Mobile></Mobile>
   </div>
@@ -388,6 +390,12 @@ h2 {
   transition: opacity 3s
 }
 .fade-enter {
+  opacity: 0
+}
+.modal-fade-enter-active, .modal-fade-leave-active {
+  transition: opacity 5s
+}
+.modal-fade-enter, .modal-fade-leave-to {
   opacity: 0
 }
 </style>
