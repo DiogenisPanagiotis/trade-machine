@@ -34,7 +34,9 @@ export default {
   name: 'modal',
   props: [ 'team1', 'team2', 'team1Logo', 'team2Logo'],
   data(){
-    return {}
+    return {
+
+    }
   }
 }
 </script>

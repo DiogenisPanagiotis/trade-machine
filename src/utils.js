@@ -162,6 +162,10 @@ module.exports = {
       this.team1 = selection;
       this.team1Logo = team.logo;
       this.team++;
+      this.transitioning = !this.transitioning;
+      setTimeout(()=> {
+        this.transitioning = !this.transitioning;
+      }, 1);
       for (let i = 0; i < this.t1.length; i++){
         let ele = this.t1[i];
         if (this.team1 === ele.teamName){
@@ -195,14 +199,13 @@ module.exports = {
     } else {
       this.team2 = selection;
       this.team2Logo = team.logo;
+      console.log('yo', this.team1, this.team1Logo);
+      console.log('yo', this.team2, this.team2Logo);
       $('#myModalTrade').modal('show');
-      console.log(this.team1Logo);
-      console.log(this.team1, this.team2);
-      console.log(this.team2Logo);
       this.trading = !this.trading;
+      this.transitioning = !this.transitioning;
       this.team = 0;
     }
-    this.buttonBool = true;
   },
   renderTrade(){
     this.trading = !this.trading;

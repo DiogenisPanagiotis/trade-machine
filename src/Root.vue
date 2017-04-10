@@ -1,5 +1,6 @@
 <template>
   <div> <!-- start -->
+    <div v-if="trading && !transitioning" class="top"></div>
     <div class="container mobileHide"> <!-- container -->
       <div class="row"> <!-- directions -->
         <div v-if="team !== 0" class="space"></div>
@@ -27,7 +28,8 @@
           </div>
         </div> <!-- directions -->
 
-        <div v-if="!trading && !directions"> <!-- selecting teams -->
+        <transition name="fade">
+        <div v-if="!trading && !directions && transitioning"> <!-- selecting teams -->
 
           <div class="col-xs-12 col-sm-6 col-sm-offset-3">
             <div v-if="team === 1"><h2> TEAM {{ team }} </h2></div>
@@ -100,15 +102,14 @@
               </div> <!-- end well -->
             </div> <!-- end collapse id -->
           </div> <!-- end columns for collape well -->
-        </div> <!-- end selecting teams -->
+        </div></transition> <!-- end selecting teams -->
       </div> <!-- end container -->
     </div> <!-- end -->
 
-
     <!-- Mobile template-->
-    <Modal class="mobileHide" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo"></Modal>
-    <div v-if="trading" class="mobileHide">
-      <Players v-if="trading" :team1="team1" :team2="team2"></Players>
+    <Modal class="mobileHide" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo" ></Modal>
+    <div class="mobileHide">
+      <Players v-if="trading && !transitioning" :team1="team1" :team2="team2"></Players>
     </div>
     <Mobile></Mobile>
   </div>
@@ -146,7 +147,8 @@ export default {
       t2: t2,
       t3: t3,
       t4: t4,
-      t5: t5
+      t5: t5,
+      transitioning: true
     }
   },
   mounted: function(){
@@ -180,6 +182,10 @@ export default {
 
 body {
   background-color: black;
+}
+
+.top {
+  margin-top: 150px;
 }
 
 h1 {
@@ -261,14 +267,6 @@ li.checked:hover {
   color: #fff;
   cursor: default;
 }
-.col-xs-8 {
-  /*border: 1px #fff solid;*/
-}
-
-.arrow {
-  /*background-color: #333333;
-  color: #333333;*/
-}
 
 .popover-content {
   /*background-color: #333333;*/
@@ -287,6 +285,9 @@ a {
 }
 .block {
   margin-top: 300px;
+}
+.blocker {
+  margin-top: 400px;
 }
 .block-pop {
   margin-top: 362px;
@@ -382,5 +383,11 @@ h2 {
 }
 .list-well {
   /*width: 10px;*/
+}
+.fade-enter-active {
+  transition: opacity 3s
+}
+.fade-enter {
+  opacity: 0
 }
 </style>
