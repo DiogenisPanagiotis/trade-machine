@@ -1,45 +1,18 @@
 module.exports = {
-  beforeEnter(el) {
-    el.style.opacity = 0;
-    el.style.height = 0;
-  },
-  enter(el, done) {
-    let delay = el.dataset.index;
-    setTimeout(function() {
-      Velocity(
-        el,
-        { opacity: 1, height: '1.6em' },
-        { complete: done }
-      )
-    }, delay);
-  },
-  leave(el, done) {
-    let delay = el.dataset.index;
-    setTimeout(function () {
-      Velocity(
-        el,
-        { opacity: 0, height: 0 },
-        { complete: done }
-      )
-    }, delay);
-  },
-  team1Select(){
-    let that = this;
-    return this.teams1.filter((team) => {
-      return team.teamName.toLowerCase().indexOf(that.team1.toLowerCase()) !== -1 && team.teamName !== that.team2;
+  mounted(){
+    $(function(){
+      $('body').popover({ selector: '[data-toggle="popover"]' });
+      $('#pop').popover('show');
     });
-  },
-  team2Select(){
-    let that = this;
-    return this.teams2.filter((team) => {
-      return team.teamName.toLowerCase().indexOf(that.team2.toLowerCase()) !== -1 && team.teamName !== that.team1;
-    });
+    setTimeout(()=>{
+      $('#pop').popover('destroy');
+    }, 3000);
   },
   dollarify(salary){
     let num = salary.toString().split('');
     let niceNum = [];
     let count = 0;
-    for (var i = num.length - 1; i >= 0; i--) {
+    for (let i = num.length - 1; i >= 0; i--) {
       if (count === 3) {
         niceNum.unshift(',');
         count = 0;
@@ -47,7 +20,6 @@ module.exports = {
       niceNum.unshift(num[i]);
       count++;
     }
-    console.log(`$${niceNum.join('')}`);
     return `$${niceNum.join('')}`;
   },
   tradePlayer(player){
@@ -70,7 +42,7 @@ module.exports = {
     if (player.teamName === this.team1) {
       this.team1Data.players.splice(index, 1); // Find and remove player from teamOneTrades and disabled
       let keeping = null;
-      for (var i = 0; i < this.disabled.length; i++) {
+      for (let i = 0; i < this.disabled.length; i++) {
         let currentPlayer = this.disabled[i];
         if (currentPlayer === player.name) {
           keeping = i;
@@ -83,7 +55,7 @@ module.exports = {
     } else if (player.teamName === this.team2) {
       this.team2Data.players.splice(index, 1);
       let keeping = null;
-      for (var i = 0; i < this.disabled.length; i++) {
+      for (let i = 0; i < this.disabled.length; i++) {
         let currentPlayer = this.disabled[i];
         if (currentPlayer === player.name) {
           keeping = i;
@@ -98,8 +70,6 @@ module.exports = {
   validateTrade(){
     let low = Math.min(this.team1Data.trading, this.team2Data.trading);
     let high = Math.max(this.team1Data.trading, this.team2Data.trading);
-    console.log('high, low:', high, low);
-    console.log("% Diff:", (high / low) * 100);
     if (low === 0 || high === 0) {
       this.valid = null;
     } else {
@@ -109,18 +79,14 @@ module.exports = {
   completeTrade(){
     for (let i = 0; i < this.team1Data.players.length; i++) {
       let currentPlayer = this.team1Data.players[i];
-      console.log(`Trading: ${currentPlayer}`);
       currentPlayer.teamName = this.team2;
       this.received.team2.push(currentPlayer);
-      console.log(`${currentPlayer} now on ${this.team2}`);
     }
     this.team1Data.players = [];
     for (let i = 0; i < this.team2Data.players.length; i++) {
       let currentPlayer = this.team2Data.players[i];
-      console.log(`Trading: ${currentPlayer}`);
       currentPlayer.teamName = this.team1;
       this.received.team1.push(currentPlayer);
-      console.log(`${currentPlayer} now on ${this.team1}`);
     }
     this.team2Data.players = [];
     this.team1Data.trading = 0;
@@ -141,22 +107,6 @@ module.exports = {
       'team2Salary': 0
     }
   },
-  clickArrow(){
-    if (this.team === 1) {
-      this.team += 1;
-      this.bool1 = !this.bool1;
-      this.buttonBool = !this.buttonBool;
-      $('#pop').popover('show');
-      setTimeout(()=>{
-        $('#pop').popover('destroy');
-      }, 3000);
-    } else {
-      this.bool2 = !this.bool2;
-    }
-    if (this.team2){
-      this.team = 0;
-    }
-  },
   selectTeam(team, selection){
     if (this.team === 1){
       this.team1 = selection;
@@ -166,48 +116,49 @@ module.exports = {
       setTimeout(()=> {
         this.transitioning = !this.transitioning;
       }, 1);
-      for (let i = 0; i < this.t1.length; i++){
-        let ele = this.t1[i];
-        if (this.team1 === ele.teamName){
-          this.t1.splice(i, 1);
-        }
-      }
-      for (let i = 0; i < this.t2.length; i++){
-        let ele = this.t2[i];
-        if (this.team1 === ele.teamName){
-          this.t2.splice(i, 1);
-        }
-      }
-      for (let i = 0; i < this.t3.length; i++){
-        let ele = this.t3[i];
-        if (this.team1 === ele.teamName){
-          this.t3.splice(i, 1);
-        }
-      }
-      for (let i = 0; i < this.t4.length; i++){
-        let ele = this.t4[i];
-        if (this.team1 === ele.teamName){
-          this.t4.splice(i, 1);
-        }
-      }
-      for (let i = 0; i < this.t5.length; i++){
-        let ele = this.t5[i];
-        if (this.team1 === ele.teamName){
-          this.t5.splice(i, 1);
-        }
-      }
+      this.loop(this.t1, selection);
+      this.loop(this.t2, selection);
+      this.loop(this.t3, selection);
+      this.loop(this.t4, selection);
+      this.loop(this.t5, selection);
     } else {
       this.team2 = selection;
       this.team2Logo = team.logo;
-      console.log('yo', this.team1, this.team1Logo);
-      console.log('yo', this.team2, this.team2Logo);
       $('#myModalTrade').modal('show');
       this.trading = !this.trading;
       this.transitioning = !this.transitioning;
       this.team = 0;
     }
   },
+  loop(teamArr, team1){
+    for (let i = 0; i < teamArr.length; i++) {
+      let obj = teamArr[i];
+      if (team1 === obj.teamName){
+        teamArr.splice(i, 1);
+      }
+    }
+  },
   renderTrade(){
     this.trading = !this.trading;
+  },
+  hideDirections(){
+    this.directions = !this.directions;
+  },
+  initiate(){
+    setTimeout(() => {
+      this.bool = true;
+    }, 10);
+  },
+  team1Players() {
+    let that = this;
+    return this.players1.filter((player) => {
+      return player.teamName === that.team1;
+    });
+  },
+  team2Players() {
+    let that = this;
+    return this.players2.filter((player) => {
+      return player.teamName === that.team2;
+    });
   }
 };

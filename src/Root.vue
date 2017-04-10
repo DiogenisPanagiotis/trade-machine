@@ -104,7 +104,7 @@
               </div> <!-- end well -->
             </div> <!-- end collapse id -->
           </div> <!-- end columns for collape well -->
-        </div> <!-- end selecting teams -->
+        </div></transition> <!-- end selecting teams -->
       </div> <!-- end container -->
     </div> <!-- end -->
 
@@ -140,50 +140,24 @@ export default {
       team1Logo: null,
       team2: '',
       team2Logo: null,
-      teams1: Teams,
-      teams2: Teams,
-      bool1: true,
-      bool2: true,
-      buttonBool: false,
       trading: false,
       directions: true,
+      transitioning: true,
+      bool: false,
       t1: t1,
       t2: t2,
       t3: t3,
       t4: t4,
-      t5: t5,
-      transitioning: true,
-      bool: false
+      t5: t5
     }
   },
-  mounted: function(){
-    $(function(){
-      $('body').popover({ selector: '[data-toggle="popover"]' });
-      $('#pop').popover('show');
-    });
-    setTimeout(()=>{
-      $('#pop').popover('destroy');
-    }, 3000);
-  },
-  computed: {
-    team1Select: utils.team1Select,
-    team2Select: utils.team2Select
-  },
+  mounted: utils.mounted,
   methods: {
-    clickArrow: utils.clickArrow,
     selectTeam: utils.selectTeam,
     renderTrade: utils.renderTrade,
-    beforeEnter: utils.beforeEnter,
-    enter: utils.enter,
-    leave: utils.leave,
-    hideDirections: function(){
-      this.directions = !this.directions;
-    },
-    initiate: function(){
-      setTimeout(() => {
-        this.bool = true;
-      }, 10);
-    }
+    hideDirections: utils.hideDirections,
+    initiate: utils.initiate,
+    loop: utils.loop
   }
 }
 </script>
@@ -200,7 +174,6 @@ body {
 
 h1 {
   color: #fff;
-  /*margin-top: 300px;*/
   margin-bottom: 17px;
 }
 
@@ -219,7 +192,6 @@ input:focus {
 ::-webkit-input-placeholder {
   color: #444444;
   font-size: 24px;
-  /*text-decoration: underline;*/
 }
 
 ul {
@@ -251,8 +223,6 @@ li:hover {
 }
 
 .glyphicon-random {
-  /*display: inline;*/
-  /*float: right;*/
   margin-top: 5px;
   margin-right: 190px;
   font-size: 35px;
@@ -278,18 +248,6 @@ li.checked:hover {
   cursor: default;
 }
 
-.popover-content {
-  /*background-color: #333333;*/
-  color: #444444;
-  /*border: none;*/
-  font-weight: bold;
-}
-.popover-title {
-  /*background-color: #333333;*/
-}
-.pop {
-  width: 1px;
-}
 a {
   margin-left: 180px;
 }
@@ -362,10 +320,6 @@ h2 {
   color: black;
 }
 
-.btn-select {
-
-}
-
 .btn-team {
   background-color: black;
   border: 3px solid #33B17D;
@@ -391,9 +345,7 @@ h2 {
   padding-right: 0px;
   width: 20%;
 }
-.list-well {
-  /*width: 10px;*/
-}
+
 .fade-enter-active {
   transition: opacity 3s
 }

@@ -160,18 +160,8 @@ export default {
     }
   },
   computed: {
-    team1Players: function () {
-      let that = this;
-      return this.players1.filter((player) => {
-        return player.teamName === that.team1;
-      });
-    },
-    team2Players: function () {
-      let that = this;
-      return this.players2.filter((player) => {
-        return player.teamName === that.team2;
-      });
-    }
+    team1Players: utils.team1Players,
+    team2Players: utils.team2Players
   },
   methods: {
     dollarify: utils.dollarify,
