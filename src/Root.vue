@@ -1,10 +1,12 @@
 <template>
   <div> <!-- start -->
+    {{ initiate() }}
     <div v-if="trading && !transitioning" class="top"></div>
     <div class="container mobileHide"> <!-- container -->
       <div class="row"> <!-- directions -->
         <div v-if="team !== 0" class="space"></div>
-        <div v-if="directions" class="col-xs-12 col-sm-4 col-sm-offset-4">
+        <transition name="fade">
+        <div v-if="directions && bool" class="col-xs-12 col-sm-4 col-sm-offset-4">
           <h2>NBA Trade Machine</h2>
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
@@ -27,7 +29,7 @@
             <button @click="hideDirections()" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-thumbs-up"></span></button>
           </div>
         </div> <!-- directions -->
-
+        </transition>
         <transition name="fade">
         <div v-if="!trading && !directions && transitioning"> <!-- selecting teams -->
 
@@ -150,7 +152,8 @@ export default {
       t3: t3,
       t4: t4,
       t5: t5,
-      transitioning: true
+      transitioning: true,
+      bool: false
     }
   },
   mounted: function(){
@@ -175,6 +178,11 @@ export default {
     leave: utils.leave,
     hideDirections: function(){
       this.directions = !this.directions;
+    },
+    initiate: function(){
+      setTimeout(() => {
+        this.bool = true;
+      }, 10);
     }
   }
 }
