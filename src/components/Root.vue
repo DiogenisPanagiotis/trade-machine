@@ -120,16 +120,16 @@
 </template>
 
 <script>
-import Teams from './teams.js';
-import t1 from './teamObject1.js';
-import t2 from './teamObject2.js';
-import t3 from './teamObject3.js';
-import t4 from './teamObject4.js';
-import t5 from './teamObject5.js';
+import Teams from '../data/teams.js';
+import t1 from '../data/teamObject1.js';
+import t2 from '../data/teamObject2.js';
+import t3 from '../data/teamObject3.js';
+import t4 from '../data/teamObject4.js';
+import t5 from '../data/teamObject5.js';
 import Mobile from './Mobile.vue';
 import Players from './Players.vue';
 import Modal from './Modal.vue';
-import utils from './utils.js';
+import utils from '../utils.js';
 export default {
   name: 'root',
   components: { Players, Mobile, Modal },

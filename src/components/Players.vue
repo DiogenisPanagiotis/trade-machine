@@ -130,8 +130,8 @@
 </template>
 
 <script>
-import players from './players.js';
-import utils from './utils.js';
+import players from '../data/players.js';
+import utils from '../utils.js';
 export default {
   name: 'players',
   props: [ 'team1', 'team2', 'team1Logo', 'team2Logo'],
