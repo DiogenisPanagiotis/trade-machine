@@ -16,7 +16,8 @@
     <div class="row">
       <div class="col-xs-4 col-xs-offset-2">
         <ul class="list-group">
-          <li class="list-group-item list-group-team">{{ team1 }}
+          <li class="list-group-item list-group-team">
+            <img class="logos" :src="team1Logo" height="30" width="30" /> {{ team1 }}
             <span v-if="team1Data.net >= 0" class="team-badge badge pos">+{{ dollarify(team1Data.net) }}</span>
             <span v-if="team1Data.net < 0" class="team-badge badge neg">-{{ dollarify(team1Data.net) }}</span>
           </li>
@@ -24,7 +25,8 @@
       </div>
       <div class="col-xs-4">
         <ul class="list-group">
-          <li class="list-group-item list-group-team">{{ team2 }}
+          <li class="list-group-item list-group-team">
+            <img class="logos" :src="team2Logo" height="30" width="30" /> {{ team2 }}
             <span v-if="team2Data.net >= 0" class="team-badge badge pos">+{{ dollarify(team2Data.net) }}</span>
             <span v-if="team2Data.net < 0" class="team-badge badge neg">-{{ dollarify(team2Data.net) }}</span>
           </li>
@@ -132,7 +134,7 @@ import players from './players.js';
 import utils from './utils.js';
 export default {
   name: 'players',
-  props: [ 'team1', 'team2'],
+  props: [ 'team1', 'team2', 'team1Logo', 'team2Logo'],
   data(){
     return {
       players1: players,
@@ -366,4 +368,8 @@ border-radius: 5px !important;
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px){  .mobileHide { display: none;}}
+
+.logos {
+  margin-bottom: 3px;
+}
 </style>

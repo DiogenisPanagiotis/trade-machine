@@ -112,7 +112,7 @@
     <Modal class="mobileHide" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo" ></Modal>
     <div class="mobileHide">
       <transition name="modal-fade">
-        <Players v-if="trading && !transitioning" :team1="team1" :team2="team2"></Players>
+        <Players v-if="trading && !transitioning" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo"></Players>
       </transition>
     </div>
     <Mobile></Mobile>
