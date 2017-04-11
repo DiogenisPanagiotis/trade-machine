@@ -7,7 +7,7 @@
         <div v-if="team !== 0" class="space"></div>
         <transition name="fade">
         <div v-if="directions && bool" class="col-xs-12 col-sm-4 col-sm-offset-4">
-          <h2>NBA Trade Machine</h2>
+          <h2 class="title">NBA Trade Machine</h2>
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
@@ -19,10 +19,10 @@
               </div>
               <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <ul class="list-group">
-                  <li class="list-group-item how-to"><b>1.</b> Select Team 1.</li>
-                  <li class="list-group-item how-to"><b>2.</b> Select Team 2.</li>
-                  <li class="list-group-item how-to"><b>3.</b> Trade players.</li>
-                  <li class="list-group-item how-to"><b>4.</b> Enjoy!</li>
+                  <li class="list-group-item how-to"><b>1. </b><span class="dir"> Select Team 1.</span></li>
+                  <li class="list-group-item how-to"><b>2. </b><span class="dir"> Select Team 2.</span></li>
+                  <li class="list-group-item how-to"><b>3. </b><span class="dir"> Trade players.</span></li>
+                  <li class="list-group-item how-to"><b>4. </b><span class="dir dir-last"> Enjoy!</span></li>
                 </ul>
               </div>
             </div>
@@ -275,6 +275,7 @@ and (max-device-width : 480px){  .mobileHide { display: none;}}
 .directions {
   margin-left: 16px;
   text-align: center;
+  vertical-align: middle;
 }
 
 .space {
@@ -291,13 +292,25 @@ h2 {
   width: 275px;
 }
 .how-to {
-  color: black;
+  color: white;
+  background-color: black;
 }
 
 .how-to:hover {
-  color: black;
+  color: white;
   text-decoration: none;
   cursor: default;
+}
+
+.dir {
+  transition: 1s ease-out;
+  display: inline-block;
+}
+.dir:hover {
+  transform: translateX(54px);
+}
+.dir-last:hover {
+  transform: translateX(83px);
 }
 
 .btn-success {
@@ -357,5 +370,30 @@ h2 {
 }
 .modal-fade-enter, .modal-fade-leave-to {
   opacity: 0
+}
+
+#headingOne {
+  background-color: black;
+  border: 2px solid white;
+  height: 46px;
+}
+
+.panel-title {
+  color: white;
+}
+
+#collapseOne {
+  border: 2px solid white;
+  border-top: 0px solid white;
+}
+
+.panel>.panel-collapse>.list-group .list-group-item {
+  border-width: 2px;
+}
+.title {
+  transition: 1s ease-out;
+}
+.title:hover {
+  transform: translateY(-10px);
 }
 </style>
