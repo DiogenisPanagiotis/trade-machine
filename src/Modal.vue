@@ -8,11 +8,14 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-xs-6 text-center">
+            <div class="col-xs-5 left-col text-center">
               <h3>{{ team1 }}</h3>
               <img :src="team1Logo" height="120px" width="120px" />
             </div>
-            <div class="col-xs-6 text-center">
+            <div class="col-xs-1 text-center">
+              <span class="glyphicon glyphicon-transfer" area-hidden="true"></span>
+            </div>
+            <div class="col-xs-5 right-col text-center">
               <h3>{{ team2 }}</h3>
               <img :src="team2Logo" height="120px" width="120px" />
             </div>
@@ -75,13 +78,29 @@ export default {
 h3 {
   color: #fff;
   font-size: 18px;
+  text-align: center;
 }
 img {
   margin-top: 20px;
   margin-bottom: 30px;
 }
 
-.col-xs-6 {
+.col-xs-5 {
   padding: none;
+}
+.left-col {
+  margin-left: 18px;
+}
+.col-xs-1 {
+  padding: none;
+}
+.glyphicon-transfer {
+  background-color: transparent;
+  color: #33B17D;
+  margin-top: 100px;
+  font-size: 40px;
+}
+.right-col {
+  margin-left: 18px;
 }
 </style>
