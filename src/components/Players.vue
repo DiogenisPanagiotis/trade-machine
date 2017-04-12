@@ -192,10 +192,6 @@ export default {
 
 <style scoped>
 
-.top {
-  margin-top: 150px;
-}
-
 .list-group-item {
   background-color: black;
 }

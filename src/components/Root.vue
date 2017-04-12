@@ -1,10 +1,8 @@
 <template>
   <div> <!-- start -->
     {{ initiate() }}
-    <div v-if="trading && !transitioning" class="top"></div>
     <div class="container mobileHide"> <!-- container -->
-      <div class="row"> <!-- directions -->
-        <div v-if="team !== 0" class="space"></div>
+      <div class="row top"> <!-- directions -->
         <transition name="fade">
         <div v-if="directions && bool" class="col-xs-12 col-sm-4 col-sm-offset-4">
           <h2 class="title">NBA Trade Machine</h2>
@@ -176,9 +174,6 @@ body {
   margin-top: 180px;
 }
 
-.space {
-  margin-top: 180px;
-}
 h1 {
   color: #fff;
   margin-bottom: 17px;
@@ -257,18 +252,6 @@ li.checked:hover {
 
 a {
   margin-left: 180px;
-}
-.block {
-  margin-top: 300px;
-}
-.blocker {
-  margin-top: 400px;
-}
-.block-pop {
-  margin-top: 362px;
-}
-.block-arrow {
-  margin-top: 350px;
 }
 
 @media only screen

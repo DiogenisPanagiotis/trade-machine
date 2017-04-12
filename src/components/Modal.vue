@@ -2,10 +2,6 @@
   <div class="modal fade" id="myModalTrade" tabindex="-1" role="dialog" aria-labelledby="myModalTrade">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeModal" aria-hidden="true">&times;</span></button>
-          <span class="header-success">Transaction Overview.</span>
-        </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-xs-5 left-col text-center">
@@ -69,7 +65,7 @@ export default {
 }
 
 .modal-dialog {
-  padding-top: 10%;
+  padding-top: 15%;
 }
 
 .header-success {
@@ -83,7 +79,7 @@ h3 {
 }
 img {
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .col-xs-5 {
