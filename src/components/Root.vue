@@ -116,6 +116,7 @@
       </transition>
     </div>
     <Mobile></Mobile>
+    <Feedback></Feedback>
   </div>
 </template>
 
@@ -129,10 +130,11 @@ import t5 from '../data/teamObject5.js';
 import Mobile from './Mobile.vue';
 import Players from './Players.vue';
 import Modal from './Modal.vue';
+import Feedback from './Feedback.vue';
 import utils from '../utils.js';
 export default {
   name: 'root',
-  components: { Players, Mobile, Modal },
+  components: { Players, Mobile, Modal, Feedback },
   data () {
     return {
       team: 1,
@@ -320,11 +322,13 @@ h2 {
   width: 275px;
   background-color: black;
   border: 3px solid #33B17D;
+  outline: none;
 }
 .btn-success:hover {
   border: 2px solid #33B17D;
   background-color: #33B17D;
   color: black;
+  outline: none;
 }
 .glyphicon-thumbs-up {
   background-color: transparent;
@@ -397,5 +401,8 @@ h2 {
 }
 .title:hover {
   transform: translateY(-10px);
+}
+.btn {
+  outline: none;
 }
 </style>

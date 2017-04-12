@@ -172,5 +172,8 @@ module.exports = {
     this.trading = false;
     this.directions = true;
     this.bool = true;
+  },
+  renderFormSpree(){
+    $('#formFeedback').modal('show');
   }
 };

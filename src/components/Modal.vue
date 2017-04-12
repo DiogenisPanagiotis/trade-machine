@@ -65,6 +65,7 @@ export default {
 .close:hover {
   color: #33B17D;
   text-shadow: none;
+  outline: none;
 }
 
 .modal-dialog {

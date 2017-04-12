@@ -15,6 +15,11 @@
           <span class="glyphicon glyphicon-ban-circle" area-hidden="true"></span>
         </button>
       </div>
+      <div class="col-xs-2 text-right">
+        <button @click="renderFormSpree()" class="btn btn-md feedback">
+          <span class="glyphicon glyphicon-send" area-hidden="true"></span>
+        </button>
+      </div>
     </div>
     <br/>
     <!-- Team & Net -->
@@ -130,11 +135,13 @@
         </div>
       </div>
     </div>
+    <!-- <Feedback></Feedback> -->
 
   </div>
 </template>
 
 <script>
+import Feedback from './Feedback.vue';
 import players from '../data/players.js';
 import utils from '../utils.js';
 export default {
@@ -177,7 +184,8 @@ export default {
     undoTradePlayer: utils.undoTradePlayer,
     validateTrade: utils.validateTrade,
     completeTrade: utils.completeTrade,
-    resetTrade: utils.resetTrade
+    resetTrade: utils.resetTrade,
+    renderFormSpree: utils.renderFormSpree
   }
 }
 </script>
@@ -239,15 +247,27 @@ export default {
   vertical-align: middle;
   width: 100px;
 }
+.feedback {
+  background-color: black;
+  border: #4AA0DD 1px solid;
+  vertical-align: middle;
+  width: 100px;
+}
 
 .btn-md:hover {
   background-color: #33B17D;
+}
+.feedback:hover {
+  background-color: #4AA0DD;
 }
 
 .btn-md:hover .glyphicon-transfer {
   color: black;
 }
 .btn-md:hover .glyphicon-arrow-left {
+  color: black;
+}
+.btn-md:hover .glyphicon-send {
   color: black;
 }
 
@@ -259,6 +279,12 @@ export default {
 .glyphicon-arrow-left {
   background-color: transparent;
   color: #33B17D;
+  margin-top: 3px;
+}
+
+.glyphicon-send {
+  background-color: transparent;
+  color: #4AA0DD;
   margin-top: 3px;
 }
 
@@ -386,5 +412,8 @@ and (max-device-width : 480px){  .mobileHide { display: none;}}
 
 .logos {
   margin-bottom: 3px;
+}
+.btn:focus {
+  outline: none;
 }
 </style>
