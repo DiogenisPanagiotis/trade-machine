@@ -1,6 +1,6 @@
 # Trade-Machine
 
-> NBA trade simulator built with Vue.js, Node, Express, Webpack
+> NBA trade simulator built with Vue.js, Node, Express, Webpack.
 
 ## Demo
 
