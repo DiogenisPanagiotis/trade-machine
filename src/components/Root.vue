@@ -169,9 +169,12 @@ body {
 }
 
 .top {
-  margin-top: 150px;
+  margin-top: 180px;
 }
 
+.space {
+  margin-top: 180px;
+}
 h1 {
   color: #fff;
   margin-bottom: 17px;
@@ -276,10 +279,6 @@ and (max-device-width : 480px){  .mobileHide { display: none;}}
   margin-left: 16px;
   text-align: center;
   vertical-align: middle;
-}
-
-.space {
-  margin-top: 225px;
 }
 
 h2 {
@@ -391,6 +390,7 @@ h2 {
   border-width: 2px;
 }
 .title {
+  margin-top: 70px;
   transition: 1s ease-out;
 }
 .title:hover {

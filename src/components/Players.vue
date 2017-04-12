@@ -295,7 +295,7 @@ export default {
 }
 
 .modal-dialog {
-  padding-top: 10%;
+  padding-top: 12.5%;
 }
 
 .col-xs-6 {
