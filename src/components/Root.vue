@@ -109,10 +109,10 @@
     </div> <!-- end -->
 
     <!-- Mobile template-->
-    <Modal class="mobileHide" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo" ></Modal>
+    <Modal class="mobileHide" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo"></Modal>
     <div class="mobileHide">
       <transition name="modal-fade">
-        <Players v-if="trading && !transitioning" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo"></Players>
+        <Players v-if="trading && !transitioning" :reSelectTeams="reSelectTeams" :team1="team1" :team2="team2" :team1Logo="team1Logo" :team2Logo="team2Logo"></Players>
       </transition>
     </div>
     <Mobile></Mobile>
@@ -144,6 +144,7 @@ export default {
       directions: true,
       transitioning: true,
       bool: false,
+      spliced: null,
       t1: t1,
       t2: t2,
       t3: t3,
@@ -157,7 +158,8 @@ export default {
     renderTrade: utils.renderTrade,
     hideDirections: utils.hideDirections,
     initiate: utils.initiate,
-    loop: utils.loop
+    loop: utils.loop,
+    reSelectTeams: utils.reSelectTeams
   }
 }
 </script>
@@ -364,10 +366,10 @@ h2 {
 .fade-enter {
   opacity: 0
 }
-.modal-fade-enter-active, .modal-fade-leave-active {
+.modal-fade-enter-active {
   transition: opacity 5s
 }
-.modal-fade-enter, .modal-fade-leave-to {
+.modal-fade-enter {
   opacity: 0
 }
 

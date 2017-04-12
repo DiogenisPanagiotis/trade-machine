@@ -134,6 +134,7 @@ module.exports = {
     for (let i = 0; i < teamArr.length; i++) {
       let obj = teamArr[i];
       if (team1 === obj.teamName){
+        this.spliced = [teamArr, obj, i];
         teamArr.splice(i, 1);
       }
     }
@@ -149,16 +150,27 @@ module.exports = {
       this.bool = true;
     }, 10);
   },
-  team1Players() {
+  team1Players(){
     let that = this;
     return this.players1.filter((player) => {
       return player.teamName === that.team1;
     });
   },
-  team2Players() {
+  team2Players(){
     let that = this;
     return this.players2.filter((player) => {
       return player.teamName === that.team2;
     });
+  },
+  reSelectTeams(){
+    let teamObj = this.spliced[0];
+    let i = this.spliced[2];
+    let obj = this.spliced[1];
+    teamObj.splice(i, 0, obj);
+    this.transitioning = true;
+    this.team = 1;
+    this.trading = false;
+    this.directions = true;
+    this.bool = true;
   }
 };

@@ -2,7 +2,12 @@
   <div class="container mobileHide">
     {{ validateTrade() }}
     <div class="row">
-      <div class="col-xs-4 col-xs-offset-4 text-center">
+      <div class="col-xs-2 col-xs-offset-2">
+        <button class="btn btn-md valid" @click="reSelectTeams()">
+          <span class="glyphicon glyphicon-arrow-left" area-hidden="true"></span>
+        </button>
+      </div>
+      <div class="col-xs-4 text-center">
         <button v-if="valid" class="btn btn-md valid" @click="completeTrade()">
           <span class="glyphicon glyphicon-transfer" area-hidden="true"></span>
         </button>
@@ -134,7 +139,7 @@ import players from '../data/players.js';
 import utils from '../utils.js';
 export default {
   name: 'players',
-  props: [ 'team1', 'team2', 'team1Logo', 'team2Logo'],
+  props: ['reSelectTeams', 'team1', 'team2', 'team1Logo', 'team2Logo'],
   data(){
     return {
       players1: players,
@@ -158,7 +163,8 @@ export default {
       completed: false,
       valid: null,
       disabled: [],
-      active: false
+      active: false,
+      spliced: null
     }
   },
   computed: {
@@ -241,7 +247,16 @@ export default {
 .btn-md:hover .glyphicon-transfer {
   color: black;
 }
+.btn-md:hover .glyphicon-arrow-left {
+  color: black;
+}
+
 .glyphicon-transfer {
+  background-color: transparent;
+  color: #33B17D;
+  margin-top: 3px;
+}
+.glyphicon-arrow-left {
   background-color: transparent;
   color: #33B17D;
   margin-top: 3px;
