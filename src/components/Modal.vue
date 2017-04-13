@@ -6,14 +6,14 @@
           <div class="row">
             <div class="col-xs-5 left-col text-center">
               <h3>{{ team1 }}</h3>
-              <img :src="team1Logo" height="120px" width="120px" />
+              <img :src="team1Logo" height="120px" width="120px" class="logo"/>
             </div>
             <div class="col-xs-1 text-center">
               <span class="glyphicon glyphicon-transfer" area-hidden="true"></span>
             </div>
             <div class="col-xs-5 right-col text-center">
               <h3>{{ team2 }}</h3>
-              <img :src="team2Logo" height="120px" width="120px" />
+              <img :src="team2Logo" height="120px" width="120px" class="logo"/>
             </div>
           </div>
         </div>
@@ -99,5 +99,8 @@ img {
 }
 .right-col {
   margin-left: 18px;
+}
+.logo {
+  margin-bottom: 30px;
 }
 </style>

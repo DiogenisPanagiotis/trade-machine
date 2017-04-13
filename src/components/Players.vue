@@ -27,7 +27,7 @@
       <div class="col-xs-4 col-xs-offset-2">
         <ul class="list-group">
           <li class="list-group-item list-group-team">
-            <img class="logos" :src="team1Logo" height="30" width="30" /> {{ team1 }}
+            <img class="logos" :src="team1Logo" height="30" width="30" /> </span class="team-in-trade">{{ team1 }}</span>
             <span v-if="team1Data.net >= 0" class="team-badge badge pos">+{{ dollarify(team1Data.net) }}</span>
             <span v-if="team1Data.net < 0" class="team-badge badge neg">-{{ dollarify(team1Data.net) }}</span>
           </li>
@@ -36,7 +36,7 @@
       <div class="col-xs-4">
         <ul class="list-group">
           <li class="list-group-item list-group-team">
-            <img class="logos" :src="team2Logo" height="30" width="30" /> {{ team2 }}
+            <img class="logos" :src="team2Logo" height="30" width="30" /> <span class="team-in-trade">{{ team2 }}</span>
             <span v-if="team2Data.net >= 0" class="team-badge badge pos">+{{ dollarify(team2Data.net) }}</span>
             <span v-if="team2Data.net < 0" class="team-badge badge neg">-{{ dollarify(team2Data.net) }}</span>
           </li>
@@ -89,26 +89,30 @@
         <div class="modal-content">
           <div class="modal-header">
             <button @click="resetTrade()"type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeModal" aria-hidden="true">&times;</span></button>
-            <span class="header-success">SUCCESSFUL TRADE!</span><span class="glyphicon glyphicon-ok success" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-transfer success" aria-hidden="true"></span>
           </div>
           <div class="modal-body">
 
-            <div class="row">
+            <div class="row first-row">
               <div class="col-xs-6">
-                <ul class="list-group">
-                  <li class="list-group-item list-group-team modal-team">{{ team1 }}
+                <img :src="team1Logo" height="120px" width="120px" class="modal-img"/>
+                <!-- <ul class="list-group">
+                  <li class="list-group-item list-group-team modal-team">
+                    {{ team1 }}
                     <span v-if="received.team1Salary >= 0" class="team-badge badge modal-badge pos">+{{ dollarify(received.team1Salary) }}</span>
                     <span v-if="received.team1Salary < 0" class="team-badge badge modal-badge neg">-{{ dollarify(received.team1Salary) }}</span>
                   </li>
-                </ul>
+                </ul> -->
               </div>
               <div class="col-xs-6">
-                <ul class="list-group">
-                  <li class="list-group-item list-group-team modal-team-right">{{ team2 }}
+                <img :src="team2Logo" height="120px" width="120px" class="modal-img"/>
+                <!-- <ul class="list-group">
+                  <li class="list-group-item list-group-team modal-team-right">
+                    {{ team2 }}
                     <span v-if="received.team2Salary >= 0" class="team-badge badge modal-badge pos">+{{ dollarify(received.team2Salary) }}</span>
                     <span v-if="received.team2Salary < 0" class="team-badge badge modal-badge neg">-{{ dollarify(received.team2Salary) }}</span>
                   </li>
-                </ul>
+                </ul> -->
               </div>
             </div>
 
@@ -211,7 +215,7 @@ export default {
 }
 
 .list-group-team {
-  font-size: 21px;
+  font-size: 16px;
   border: #fff solid 1px;
 }
 .list-group-team:hover {
@@ -310,8 +314,10 @@ export default {
 }
 .modal-header {
   /*margin-top: 150px;*/
+  padding-top: 20px;
   background-color: black;
   border-bottom: 5px solid #33B17D;
+  vertical-align: middle;
 }
 .modal-body {
   padding: 5px 5px 0px 5px;
@@ -343,6 +349,7 @@ export default {
   font-size: 15px;
   border: none;
   padding-right: 0px;
+  padding-bottom: 0px;
 }
 .modal-team:hover {
   text-decoration: none;
@@ -354,6 +361,7 @@ export default {
   font-size: 15px;
   border: none;
   padding-left: 0px;
+  background-color: #33B17D;
 }
 .modal-team-right:hover {
   text-decoration: none;
@@ -364,6 +372,7 @@ export default {
 .modal-list-items {
   border: none;
   padding-right: 0px;
+  margin-left: 7px;
 }
 .modal-list-items:hover {
   cursor: default;
@@ -373,6 +382,7 @@ export default {
 .modal-list-items-right {
   border: none;
   padding-left: 0px;
+  margin-left: 7px;
 }
 .modal-list-items-right:hover {
   text-decoration: none;
@@ -397,9 +407,11 @@ border-radius: 5px !important;
   color: #33B17D;
 }
 .success {
-  font-size: 15px;
+  font-size: 20px;
   display: inline;
   color: #33B17D;
+  margin-left: 10px;
+  margin-top: 15px;
 }
 
 @media only screen
@@ -411,5 +423,18 @@ and (max-device-width : 480px){  .mobileHide { display: none;}}
 }
 .btn:focus {
   outline: none;
+}
+.modal-img {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 80px;
+}
+hr {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.first-row {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 </style>
